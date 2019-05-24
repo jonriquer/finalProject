@@ -107,10 +107,10 @@ body {
   }
 
   li img {
-    // border-radius: max($numbers: 110%);
+    // border-radius: 110%;
     object-fit: contain;
-    width: 250px;
-    height: 250px;
+    // width: 250px;
+    // height: 250px;
     transition:all .5s;
 
     
@@ -120,6 +120,10 @@ body {
     transform: scale(1.1, 1.1);
   }
 
+}
+
+.listPic {
+  
 }
 
 // --------------------
