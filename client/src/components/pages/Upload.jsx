@@ -34,7 +34,7 @@ export default class Upload extends Component {
       <div className="Home">
         <h2>Home</h2>
         <p>This is a sample project with the MERN stack</p>
-        <img src={this.state.photoUrl} width="400px"/>
+        <img src={this.state.photoUrl} width="400px" alt=""/>
         <form onSubmit={this.handleSubmit}>
           <input type="file" onChange={(e)=>this.handleChange(e)} /> <br/>
           <button type="submit">Save new profile picture</button>

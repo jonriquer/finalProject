@@ -30,6 +30,15 @@ router.post('/first-user/pictures', isLoggedIn, parser.single('picture'), (req, 
     }).catch(err=>console.error(err))
 });
 
+
+router.post('/saveStyles', (req, res, next)=>{
+  console.log(req.body, 1111111)
+  Photo.findByIdAndUpdate(req.body.id, {styles: req.body.styles}).then(response=>{
+    res.json({response:response})
+  }).catch(err=>{ console.error(err)} )
+
+})
+
 // Route to get all countries
 // router.get('/collection', (req, res, next) => {
 //   Collection.find()

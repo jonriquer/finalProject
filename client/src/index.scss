@@ -107,8 +107,8 @@ body {
   }
 
   li img {
-    // border-radius: 110%;
     object-fit: contain;
+    //border-radius: 50%;
     // width: 250px;
     // height: 250px;
     transition:all .5s;
@@ -122,8 +122,20 @@ body {
 
 }
 
-.listPic {
+.centerModal {
+  display: flex;
+  justify-content: center;
+  padding:0;
+}
+
+.modalBtnCont {
+  padding-top: 30px;
   
+
+  .btnCol {
+    display:flex;
+    justify-content: center;
+  } 
 }
 
 // --------------------

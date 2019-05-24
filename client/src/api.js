@@ -96,4 +96,12 @@ export default {
       .then(res => res.data)
       .catch(errHandler)
   },
+
+  saveStyles(styles, id){
+    return service
+      .post('/saveStyles', {styles:styles, id:id} )
+      .then(res=>res.data)
+      .catch(errHandler)
+
+  }
 }
