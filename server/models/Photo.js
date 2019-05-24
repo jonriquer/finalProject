@@ -8,11 +8,11 @@ const photoSchema = new mongoose.Schema({
     type: Object, 
     default:
       { 
-    type:"fetch", 
-    gravity:"face:center",
-    quality:"100",
+    type:"", 
+    gravity:"",
+    quality:"",
     crop:"",
-    radius:"max" 
+    radius:"" 
   }
   
   }

@@ -11,7 +11,7 @@ export default class Collection extends Component {
   state = {
     photos: [],
     clickedPhoto: String,
-    circle: {},
+    // circle: {},
     styles: {}
     // popup: false
   };
@@ -67,8 +67,25 @@ export default class Collection extends Component {
     //this.settate.styles
     let styles = {...this.state.styles}
     styles.crop = "fill"
+    styles.radius = "max"
+    styles.type = "fetch"
+    styles.gravity = "face"
+    styles.x = "300"
+    styles.y = "300"
+
     this.setState({styles})
   };
+
+  reset = () => {
+    let styles = {...this.state.styles}
+    styles.crop = ""
+    styles.radius = ""
+    styles.type = ""
+    styles.gravity = ""
+    styles.x = "300"
+    styles.y = "300"
+    this.setState({styles})
+  }
 
   render() {
     return (
@@ -79,16 +96,17 @@ export default class Collection extends Component {
         {/* {this.state.popup ? this.showUp() : ""} */}
 
         {this.state.photos.map((c, index) => {
+          console.log(c.photoUrl,345453356)
           return (
 
           <li key={index} style={c.styles}>
             <Image
               className="listPic"
+              onClick={this.editPopUp}
               cloudName="jonriquer"
-              publicId={c.photoUrl}
+              src={c.photoUrl}
               height="300"
               width="300"
-              onClick={this.editPopUp}
               id={c._id}
               type={c.styles.type}
               gravity={c.styles.gravity}
@@ -122,7 +140,7 @@ export default class Collection extends Component {
               <code><Button onClick={this.headShot}>Head Shot</Button></code>
             </Col>
             <Col xs={6} md={4} className="btnCol">
-              <code><Button>Meme</Button></code>
+              <code><Button onClick={this.reset}>Reset</Button></code>
             </Col>
             <Col xs={6} md={4} className="btnCol">
               <code><Button>Filter</Button></code>
