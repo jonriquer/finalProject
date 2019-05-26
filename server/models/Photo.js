@@ -7,12 +7,14 @@ const photoSchema = new mongoose.Schema({
   
   stylez: { 
     type: Object, 
-    default:{ 
+    original:{ 
       default: true,
       gravity:"",
       quality:"",
       crop:"",
-      radius:"" 
+      radius:"",
+      effect: "",
+      effect2: "" 
     }
   
   }

@@ -72,8 +72,23 @@ export default class Collection extends Component {
     stylez.radius = "max"
     stylez.quality = "100"
     stylez.default = "false"
+    
     this.setState({stylez: stylez})
-  };
+  }
+
+  cartoonify = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect = "cartoonify"
+    stylez.default = "false"
+    this.setState({stylez: stylez})
+  }
+
+  frost = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect2 = "art:frost"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
 
   reset = () => {
     let stylez = {...this.state.stylez}
@@ -95,7 +110,7 @@ export default class Collection extends Component {
         {/* {this.state.popup ? this.showUp() : ""} */}
 
         {this.state.photos.map((c, index) => {
-          console.log(c)
+          // console.log(c)
           return (
           // (this.state.stylez.default) ? 
             
@@ -104,11 +119,12 @@ export default class Collection extends Component {
                 
                   // className="listPic"
                   cloudName="jonriquer"
-                  publicId={(c.stylez.gravity==="")? this.state.baseUrl + c.photoUrl: c.photoUrl}
+                  publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl: c.photoUrl}
                   height="300"
                   width="300"
                   onClick={this.editPopUp}
                   id={c._id}
+                  radius={c.stylez.radius}
                   // type="fetch"
                   // gravity={c.stylez.gravity}
                   // quality={c.stylez.quality}
@@ -116,12 +132,24 @@ export default class Collection extends Component {
                   // radius={c.stylez.radius}
                 >
                   <Transformation 
-                  height="300" width="300"
-                  
-                  gravity={c.stylez.gravity}
-                  quality={c.stylez.quality}
-                  crop={c.stylez.crop}
-                  radius={c.stylez.radius} />
+                    height="300" width="300"
+                    gravity={c.stylez.gravity}
+                    quality={c.stylez.quality}
+                    crop={c.stylez.crop}
+                    radius={c.stylez.radius}
+                    effect= {c.stylez.effect}
+                    effect= {c.stylez.effect2}
+                    
+                    
+                   />
+                   <Transformation
+                   radius={c.stylez.radius}
+                   effect= {c.stylez.effect}
+                   />
+
+                   <Transformation 
+                    effect= {c.stylez.effect2}
+                   />
                 </Image>
               </li>
 
@@ -174,8 +202,21 @@ export default class Collection extends Component {
               <code><Button onClick={this.reset}>Reset</Button></code>
             </Col>
             <Col xs={6} md={4} className="btnCol">
-              <code><Button>Filter</Button></code>
+              <code><Button onClick={this.cartoonify}>Cartoonify</Button></code>
             </Col>
+          </Row>
+           
+          <Row className="show-grid modalBtnCont">
+          <Col xs={12} md={4} className="btnCol">
+              <code><Button onClick={this.frost}>Frost</Button></code>
+            </Col>
+            <Col xs={6} md={4} className="btnCol">
+              <code><Button >Primavera</Button></code>
+            </Col>
+            <Col xs={6} md={4} className="btnCol">
+              <code><Button >Aurora</Button></code>
+            </Col>
+
           </Row>
         </Container>
       </Modal.Body>
