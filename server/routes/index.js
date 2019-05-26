@@ -33,7 +33,7 @@ router.post('/first-user/pictures', isLoggedIn, parser.single('picture'), (req, 
 
 router.post('/saveStyles', (req, res, next)=>{
   console.log(req.body, 1111111)
-  Photo.findByIdAndUpdate(req.body.id, {styles: req.body.styles}).then(response=>{
+  Photo.findByIdAndUpdate(req.body.id, {stylez: req.body.stylez}).then(response=>{
     res.json({response:response})
   }).catch(err=>{ console.error(err)} )
 

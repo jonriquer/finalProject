@@ -15,7 +15,11 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countries: []
+      photos: [],
+      clickedPhoto: String,
+      // circle: {},
+      stylez: {}
+      // popup: false
     }
   }
 

@@ -97,11 +97,10 @@ export default {
       .catch(errHandler)
   },
 
-  saveStyles(styles, id){
+  saveStyles(stylez, id){
     return service
-      .post('/saveStyles', {styles:styles, id:id} )
+      .post('/saveStyles', {stylez:stylez, id:id} )
       .then(res=>res.data)
       .catch(errHandler)
-
-  }
+  },
 }

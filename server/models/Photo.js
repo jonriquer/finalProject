@@ -4,16 +4,16 @@ const photoSchema = new mongoose.Schema({
   id: String,
   title: String,
   photoUrl: String,
-  styles: { 
+  
+  stylez: { 
     type: Object, 
-    default:
-      { 
-    type:"fetch", 
-    gravity:"face:center",
-    quality:"100",
-    crop:"",
-    radius:"max" 
-  }
+    default:{ 
+      default: true,
+      gravity:"",
+      quality:"",
+      crop:"",
+      radius:"" 
+    }
   
   }
 });
