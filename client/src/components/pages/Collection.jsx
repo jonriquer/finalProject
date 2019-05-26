@@ -3,24 +3,26 @@ import api from "../../api";
 import {
   Image,
   // Video,
-  // Transformation,
+  Transformation,
   // CloudinaryContext
 } from "cloudinary-react";
 import { Modal, Col, Container, Row, Button, ButtonToolbar } from "react-bootstrap";
+
+
 export default class Collection extends Component {
   state = {
     photos: [],
     clickedPhoto: String,
-    // circle: {},
-    styles: {}
-    // popup: false
+    photoUrl: String,
+    stylez: {},
+    // default: true
   };
 
   componentDidMount() {
     api
       .getCollection()
       .then(photos => {
-        // console.log(photos);
+        console.log(photos);
         this.setState({
           photos: photos
         });
@@ -36,7 +38,7 @@ export default class Collection extends Component {
 
   editPopUp = e => {
     console.log("Clicked", e.target.id, e.target, e.target.parentNode.style);
-    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src, styles:e.target.parentNode.style});
+    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src});
   };
 
   // showUp = () => {
@@ -53,41 +55,38 @@ export default class Collection extends Component {
 
   save = () => {
     
-    api.saveStyles(this.state.styles, this.state.picID).then(res=>{
+    api.saveStyles(this.state.stylez, this.state.picID).then(res=>{
       console.log('saved',res)
       this.onHide()
-
+      setTimeout(function(){
+        window.location.reload();
+      },200);
     })
-
-    
-    
   }
 
   headShot = () => {
     //this.settate.styles
-    let styles = {...this.state.styles}
-    styles.crop = "fill"
-    styles.radius = "max"
-    styles.type = "fetch"
-    styles.gravity = "face"
-    styles.x = "300"
-    styles.y = "300"
-
-    this.setState({styles})
+    let stylez = {...this.state.stylez}
+    stylez.crop = "fill"
+    stylez.gravity = "face"
+    stylez.radius = "max"
+    stylez.quality = "100"
+    stylez.default = "false"
+    this.setState({stylez: stylez})
   };
 
   reset = () => {
-    let styles = {...this.state.styles}
-    styles.crop = ""
-    styles.radius = ""
-    styles.type = ""
-    styles.gravity = ""
-    styles.x = "300"
-    styles.y = "300"
-    this.setState({styles})
+    let stylez = {...this.state.stylez}
+    stylez.crop = null
+    stylez.gravity = null
+    stylez.radius = null
+    stylez.quality = null
+    stylez.default = "true"
+    this.setState({stylez})
   }
 
   render() {
+    
     return (
       <div className="Collection">
         
@@ -96,27 +95,57 @@ export default class Collection extends Component {
         {/* {this.state.popup ? this.showUp() : ""} */}
 
         {this.state.photos.map((c, index) => {
-          console.log(c.photoUrl,345453356)
+          console.log(c.photoUrl)
           return (
-
-          <li key={index} style={c.styles}>
-            <Image
-              className="listPic"
-              onClick={this.editPopUp}
-              cloudName="jonriquer"
-              src={c.photoUrl}
-              height="300"
-              width="300"
-              id={c._id}
-              type={c.styles.type}
-              gravity={c.styles.gravity}
-              quality={c.styles.quality}
-              crop={c.styles.crop}
-              radius={c.styles.radius}
-            />
-          </li>
-          
+          // (this.state.stylez.default) ? 
+            
+              <li key={index}>
+                <Image
+                
+                  // className="listPic"
+                  cloudName="jonriquer"
+                  publicId={c.photoUrl}
+                  height="300"
+                  width="300"
+                  onClick={this.editPopUp}
+                  id={c._id}
+                  // type="fetch"
+                  // gravity={c.stylez.gravity}
+                  // quality={c.stylez.quality}
+                  // crop={c.stylez.crop}
+                  // radius={c.stylez.radius}
+                >
+                  <Transformation 
+                  height="300" width="300"
+                  
+                  gravity={c.stylez.gravity}
+                  quality={c.stylez.quality}
+                  crop={c.stylez.crop}
+                  radius={c.stylez.radius} />
+                </Image>
+              </li>
+            // ) :
+            //     (
+            //       <li key={index}>
+            //         <Image
+            //           // className="listPic"
+            //           cloudName="jonriquer"
+            //           publicId={c.photoUrl}
+            //           height="300"
+            //           width="300"
+            //           onClick={this.editPopUp}
+            //           id={c._id}
+            //           type="fetch"
+            //           gravity={c.stylez.gravity}
+            //           quality={c.stylez.quality}
+            //           crop={c.stylez.crop}
+            //           radius={c.stylez.radius}
+            //         />
+            //       </li>
+            //     )
         )})}
+        
+        
       
 
       <Modal {...this.props} onHide={this.onHide} aria-labelledby="contained-modal-title-vcenter" show={this.state.popup }>
