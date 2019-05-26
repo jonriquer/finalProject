@@ -14,8 +14,8 @@ export default class Collection extends Component {
     photos: [],
     clickedPhoto: String,
     photoUrl: String,
-    stylez: {},
-    // default: true
+    stylez: null,
+    baseUrl: "http://res.cloudinary.com/jonriquer/image/upload/"
   };
 
   componentDidMount() {
@@ -95,7 +95,7 @@ export default class Collection extends Component {
         {/* {this.state.popup ? this.showUp() : ""} */}
 
         {this.state.photos.map((c, index) => {
-          console.log(c.photoUrl)
+          console.log(c)
           return (
           // (this.state.stylez.default) ? 
             
@@ -104,7 +104,7 @@ export default class Collection extends Component {
                 
                   // className="listPic"
                   cloudName="jonriquer"
-                  publicId={c.photoUrl}
+                  publicId={(c.stylez.gravity==="")? this.state.baseUrl + c.photoUrl: c.photoUrl}
                   height="300"
                   width="300"
                   onClick={this.editPopUp}
@@ -124,6 +124,8 @@ export default class Collection extends Component {
                   radius={c.stylez.radius} />
                 </Image>
               </li>
+
+             
             // ) :
             //     (
             //       <li key={index}>
@@ -144,7 +146,7 @@ export default class Collection extends Component {
             //       </li>
             //     )
         )})}
-        
+      
         
       
 

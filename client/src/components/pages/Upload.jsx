@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 export default class Upload extends Component {
   state = {
       file:null,
+      baseUrl: "http://res.cloudinary.com/jonriquer/image/upload/"
   }
 
   handleChange = (e) => {
@@ -34,7 +35,7 @@ export default class Upload extends Component {
       <div className="Home">
         <h2>Home</h2>
         <p>This is a sample project with the MERN stack</p>
-        <img src={this.state.photoUrl} width="300px" alt=""/>
+        <img src={this.state.baseUrl + this.state.photoUrl} width="300px" alt=""/>
         <form onSubmit={this.handleSubmit}>
           <input type="file" onChange={(e)=>this.handleChange(e)} /> <br/>
           <button type="submit">Save new profile picture</button>

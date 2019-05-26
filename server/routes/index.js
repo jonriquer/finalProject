@@ -24,7 +24,7 @@ router.post('/first-user/pictures', isLoggedIn, parser.single('picture'), (req, 
   //   })
   console.log(req.file, 2435235423544235345243)
 
-    Photo.create({ photoUrl: req.file.url, title:req.file.originalname }).then(result => {
+    Photo.create({ photoUrl: req.file.url.replace("http://res.cloudinary.com/jonriquer/image/upload/", ""), title:req.file.originalname }).then(result => {
       console.log("saved pic", result)
       res.json({saved:result})
     }).catch(err=>console.error(err))
