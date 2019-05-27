@@ -62,10 +62,10 @@ export default class Collection extends Component {
     if(this.state.stylez===null) return false
     
     api.saveStyles(this.state.stylez, this.state.picID).then(res=>{
-      console.log('saved',res)
+      console.log('saved',res, this.state.baseUrl)
       this.onHide()
       setTimeout(function(){
-        window.location.reload();
+        // window.location.reload();
       },200);
     })
   }
@@ -99,7 +99,7 @@ export default class Collection extends Component {
     stylez.default = "false"
     delete stylez.radius 
     this.setState({stylez})
-  }
+  }  
 
   reset = () => {
     let stylez = {...this.state.stylez}
@@ -149,6 +149,7 @@ export default class Collection extends Component {
     stylez.default = "false"
     this.setState({stylez})
   }
+
 
   render() {
 
@@ -232,13 +233,13 @@ export default class Collection extends Component {
 
             <Row className="show-grid centerModal">
               <Col xs={12} md={4} className="btnCol">
-                <code><Button onClick={this.circle}>Circle</Button></code>
+                <code><Button className="btn btn-light"  onClick={this.circle}>Circle</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.square}>Square</Button></code>
+                <code><Button className="btn btn-light" onClick={this.square}>Square</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.reset}>Default</Button></code>
+                <code><Button className="btn btn-light" onClick={this.reset}>Default</Button></code>
               </Col>
             </Row>
 
@@ -248,27 +249,27 @@ export default class Collection extends Component {
             
             <Row className="show-grid centerModal">
             <Col xs={12} md={4} className="btnCol">
-                <code><Button onClick={this.frost}>Frost</Button></code>
+                <code><Button className="btn btn-info" onClick={this.frost}>Frost</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.primavera}>Primavera</Button></code>
+                <code><Button className="btn btn-info" onClick={this.primavera}>Primavera</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.blackAndWhite}>B&W</Button></code>
+                <code><Button className="btn btn-info" onClick={this.blackAndWhite}>B & W</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.cartoonify}>Cartoonify</Button></code>
+                <code><Button className="btn btn-info" onClick={this.cartoonify}>Cartoonify</Button></code>
               </Col>
               <Col xs={6} md={4} className="btnCol">
-                <code><Button onClick={this.none}>None</Button></code>
+                <code><Button className="btn btn-info" onClick={this.none}>None</Button></code>
               </Col>
             </Row>
           </Container>
         </Modal.Body>
         
         <Modal.Footer>
-          <Button onClick={this.delete}>Delete</Button>
-          <Button onClick={this.save}>Save</Button>
+          <Button className="btn btn-danger" onClick={this.delete}>Delete</Button>
+          <Button className="btn btn-success" onClick={this.save}>Save</Button>
         </Modal.Footer>
       </Modal>
 
