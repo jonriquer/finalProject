@@ -94,7 +94,7 @@ body {
 
   li {
     list-style: none;
-    // background: transparent !important;
+    padding: 20px;
   }
 
   // .imgCircleRadius {
@@ -122,20 +122,31 @@ body {
 
 }
 
+.mainModal {
+  width: 60vw;
+}
+
 .centerModal {
   display: flex;
   justify-content: center;
   padding:0;
-}
-
-.modalBtnCont {
-  padding-top: 30px;
-  
 
   .btnCol {
     display:flex;
     justify-content: center;
+
+    Button {
+      margin-top: 10px;
+    }
+
   } 
+
+  
+}
+
+
+.modalBtnTitle {
+  padding-top: 30px;
 }
 
 // --------------------

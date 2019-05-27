@@ -54,6 +54,7 @@ export default class Collection extends Component {
   }
 
   save = () => {
+    if(this.state.stylez===null) return false
     
     api.saveStyles(this.state.stylez, this.state.picID).then(res=>{
       console.log('saved',res)
@@ -64,28 +65,22 @@ export default class Collection extends Component {
     })
   }
 
-  headShot = () => {
-    //this.settate.styles
+  circle = () => {
     let stylez = {...this.state.stylez}
     stylez.crop = "fill"
     stylez.gravity = "face"
     stylez.radius = "max"
     stylez.quality = "100"
     stylez.default = "false"
-    
-    this.setState({stylez: stylez})
+    this.setState({stylez})
   }
 
-  cartoonify = () => {
+  square = () => {
     let stylez = {...this.state.stylez}
-    stylez.effect = "cartoonify"
-    stylez.default = "false"
-    this.setState({stylez: stylez})
-  }
-
-  frost = () => {
-    let stylez = {...this.state.stylez}
-    stylez.effect2 = "art:frost"
+    stylez.crop = "fill"
+    stylez.gravity = "face"
+    stylez.quality = "100"
+    stylez.zoom = "0.5"
     stylez.default = "false"
     this.setState({stylez})
   }
@@ -100,6 +95,34 @@ export default class Collection extends Component {
     this.setState({stylez})
   }
 
+  cartoonify = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect = "cartoonify"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
+
+  frost = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect2 = "art:frost"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
+
+  primavera = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect3 = "art:primavera"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
+
+  blackAndWhite = () => {
+    let stylez = {...this.state.stylez}
+    stylez.effect4 = "art:audrey"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
+
   render() {
     
     return (
@@ -107,17 +130,12 @@ export default class Collection extends Component {
         
         <h2>List of Photos</h2>
 
-        {/* {this.state.popup ? this.showUp() : ""} */}
-
         {this.state.photos.map((c, index) => {
           // console.log(c)
           return (
-          // (this.state.stylez.default) ? 
             
               <li key={index}>
                 <Image
-                
-                  // className="listPic"
                   cloudName="jonriquer"
                   publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl: c.photoUrl}
                   height="300"
@@ -125,104 +143,98 @@ export default class Collection extends Component {
                   onClick={this.editPopUp}
                   id={c._id}
                   radius={c.stylez.radius}
-                  // type="fetch"
-                  // gravity={c.stylez.gravity}
-                  // quality={c.stylez.quality}
-                  // crop={c.stylez.crop}
-                  // radius={c.stylez.radius}
                 >
-                  <Transformation 
-                    height="300" width="300"
-                    gravity={c.stylez.gravity}
-                    quality={c.stylez.quality}
-                    crop={c.stylez.crop}
-                    radius={c.stylez.radius}
-                    effect= {c.stylez.effect}
-                    effect= {c.stylez.effect2}
-                    
-                    
-                   />
-                   <Transformation
-                   radius={c.stylez.radius}
-                   effect= {c.stylez.effect}
-                   />
+                  
+                <Transformation 
+                  height="300" width="300"
+                  gravity={c.stylez.gravity}
+                  quality={c.stylez.quality}
+                  crop={c.stylez.crop}
+                  radius={c.stylez.radius}
+                  effect= {c.stylez.effect}
+                  effect= {c.stylez.effect2}
+                />
 
-                   <Transformation 
-                    effect= {c.stylez.effect2}
-                   />
+                <Transformation
+                effect= {c.stylez.effect}
+                />
+
+                <Transformation 
+                effect= {c.stylez.effect2}
+                />
+
+                <Transformation 
+                  effect= {c.stylez.effect3}
+                />
+
+                <Transformation 
+                  effect= {c.stylez.effect4}
+                />
+
                 </Image>
               </li>
 
-             
-            // ) :
-            //     (
-            //       <li key={index}>
-            //         <Image
-            //           // className="listPic"
-            //           cloudName="jonriquer"
-            //           publicId={c.photoUrl}
-            //           height="300"
-            //           width="300"
-            //           onClick={this.editPopUp}
-            //           id={c._id}
-            //           type="fetch"
-            //           gravity={c.stylez.gravity}
-            //           quality={c.stylez.quality}
-            //           crop={c.stylez.crop}
-            //           radius={c.stylez.radius}
-            //         />
-            //       </li>
-            //     )
         )})}
       
         
-      
-
       <Modal {...this.props} onHide={this.onHide} aria-labelledby="contained-modal-title-vcenter" show={this.state.popup }>
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Using Grid in Modal
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body >
-        <Container>
-          <Row className="show-grid">
-            <Col xs={12} md={12} className="centerModal">
-              <code>
-                <img src={this.state.clickedPhoto} width="400px"/>
-              </code>
-            </Col>
-          </Row>
+        
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Edit your Photo
+          </Modal.Title>
+        </Modal.Header>
+        
+        <Modal.Body >
+          <Container>
+            <Row className="show-grid">
+              <Col xs={12} md={12} className="centerModal">
+                <code>
+                  <img src={this.state.clickedPhoto} width="400px"/>
+                </code>
+              </Col>
+            </Row>
 
-          <Row className="show-grid modalBtnCont">
+            <Row className="show-grid modalBtnTitle">
+              <h3>Crop</h3>
+            </Row>
+
+            <Row className="show-grid centerModal">
+              <Col xs={12} md={4} className="btnCol">
+                <code><Button onClick={this.circle}>Circle</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.square}>Square</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.reset}>Default</Button></code>
+              </Col>
+            </Row>
+
+            <Row className="show-grid modalBtnTitle">
+              <h3>Filter</h3>
+            </Row>
+            
+            <Row className="show-grid centerModal">
             <Col xs={12} md={4} className="btnCol">
-              <code><Button onClick={this.headShot}>Head Shot</Button></code>
-            </Col>
-            <Col xs={6} md={4} className="btnCol">
-              <code><Button onClick={this.reset}>Reset</Button></code>
-            </Col>
-            <Col xs={6} md={4} className="btnCol">
-              <code><Button onClick={this.cartoonify}>Cartoonify</Button></code>
-            </Col>
-          </Row>
-           
-          <Row className="show-grid modalBtnCont">
-          <Col xs={12} md={4} className="btnCol">
-              <code><Button onClick={this.frost}>Frost</Button></code>
-            </Col>
-            <Col xs={6} md={4} className="btnCol">
-              <code><Button >Primavera</Button></code>
-            </Col>
-            <Col xs={6} md={4} className="btnCol">
-              <code><Button >Aurora</Button></code>
-            </Col>
-
-          </Row>
-        </Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={this.save}>Save</Button>
-      </Modal.Footer>
+                <code><Button onClick={this.frost}>Frost</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.primavera}>Primavera</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.blackAndWhite}>B&W</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.cartoonify}>Cartoonify</Button></code>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+        
+        <Modal.Footer>
+          <Button onClick={this.save}>Save</Button>
+        </Modal.Footer>
       </Modal>
 
       </div>
