@@ -43,7 +43,7 @@ export default class Collection extends Component {
       return eachPhoto._id == e.target.id
     })
     console.log(thePhoto.stylez)
-    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src, stylez: thePhoto.stylez});
+    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src});
   };
 
   // showUp = () => {
@@ -65,7 +65,7 @@ export default class Collection extends Component {
       console.log('saved',res, this.state.baseUrl)
       this.onHide()
       setTimeout(function(){
-        // window.location.reload();
+        window.location.reload();
       },200);
     })
   }
