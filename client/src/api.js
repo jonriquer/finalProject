@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { resolveCname } from 'dns';
 
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
@@ -103,4 +104,11 @@ export default {
       .then(res=>res.data)
       .catch(errHandler)
   },
+
+  deletePhoto(id) {
+    return service 
+    .post('/deletePhoto', {id: id} )
+    .then(res => res.data)
+    .catch(errHandler)
+  }
 }

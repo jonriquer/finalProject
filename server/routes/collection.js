@@ -1,10 +1,11 @@
 const express = require('express');
+const { isLoggedIn } = require('../middlewares')
 const Photo = require('../models/Photo')
 const parser = require('../configs/cloudinary.js')
 const router = express.Router();
 
 // Route to get all countries
-router.get('/collection', (req, res, next) => {
+router.get('/collection', isLoggedIn, (req, res, next) => {
   Photo.find()
     .then(photos => {
       res.json(photos);

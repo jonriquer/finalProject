@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../api";
+import { Redirect } from 'react-router-dom';
 import {
   Image,
   // Video,
@@ -24,7 +25,7 @@ export default class Collection extends Component {
       .then(photos => {
         console.log(photos);
         this.setState({
-          photos: photos
+          photos: photos,
         });
       })
       .catch(err => console.log(err));
@@ -37,7 +38,7 @@ export default class Collection extends Component {
   };
 
   editPopUp = e => {
-    console.log("Clicked", e.target.id, e.target, e.target.parentNode.style);
+    console.log("Clicked", e.target);
     this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src});
   };
 
@@ -58,6 +59,16 @@ export default class Collection extends Component {
     
     api.saveStyles(this.state.stylez, this.state.picID).then(res=>{
       console.log('saved',res)
+      this.onHide()
+      setTimeout(function(){
+       // window.location.reload();
+      },200);
+    })
+  }
+
+  delete = () => {
+    api.deletePhoto(this.state.picID).then(res=>{
+      console.log('deleted', res)
       this.onHide()
       setTimeout(function(){
         window.location.reload();
@@ -118,12 +129,17 @@ export default class Collection extends Component {
 
   blackAndWhite = () => {
     let stylez = {...this.state.stylez}
+    console.log(stylez)
     stylez.effect4 = "art:audrey"
     stylez.default = "false"
     this.setState({stylez})
   }
 
   render() {
+
+    if(!api.isLoggedIn()){
+      return (<Redirect to='/' />)
+    }  
     
     return (
       <div className="Collection">
@@ -233,6 +249,7 @@ export default class Collection extends Component {
         </Modal.Body>
         
         <Modal.Footer>
+          <Button onClick={this.delete}>Delete</Button>
           <Button onClick={this.save}>Save</Button>
         </Modal.Footer>
       </Modal>

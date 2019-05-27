@@ -14,14 +14,6 @@ const Photo = require("../models/Photo");
 
 // This route finds the first user, takes the file from the request with the key 'picture' and save the 'pictureUrl'
 router.post('/first-user/pictures', isLoggedIn, parser.single('picture'), (req, res, next) => {
-  // User.findOneAndUpdate({_id:req.user._id}, { pictureUrl: req.file.url })
-  //   .then(() => {
-  //     res.json({
-  //       success: true,
-  //       pictureUrl: req.file.url
-
-  //     })
-  //   })
   console.log(req.file, 2435235423544235345243)
 
     Photo.create({ photoUrl: req.file.url.replace("http://res.cloudinary.com/jonriquer/image/upload/", ""), title:req.file.originalname }).then(result => {
@@ -37,6 +29,13 @@ router.post('/saveStyles', (req, res, next)=>{
     res.json({response:response})
   }).catch(err=>{ console.error(err)} )
 
+});
+
+router.post('/deletePhoto', (req,res,next)=>{
+  Photo.findByIdAndRemove(req.body.id).then(response=>{
+    res.json({response:response})
+    .catch(err=>{console.error(err)})
+  })
 })
 
 // Route to get all countries

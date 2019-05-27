@@ -4,6 +4,7 @@ const photoSchema = new mongoose.Schema({
   id: String,
   title: String,
   photoUrl: String,
+
   
   stylez: { 
     type: Object, 
