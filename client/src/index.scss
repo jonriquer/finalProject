@@ -126,6 +126,10 @@ body {
   width: 60vw;
 }
 
+.modal-dialog{
+  max-width: 600px;
+}
+
 .centerModal {
   display: flex;
   justify-content: center;
@@ -134,12 +138,15 @@ body {
   .btnCol {
     display:flex;
     justify-content: center;
+    display: contents;
 
     Button {
-      margin-top: 10px;
+      margin: 10px;
     }
 
   } 
+
+
 
   
 }

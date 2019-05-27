@@ -38,8 +38,12 @@ export default class Collection extends Component {
   };
 
   editPopUp = e => {
-    console.log("Clicked", e.target);
-    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src});
+    console.log("Clicked", e.target.id, e.target.src);
+    let thePhoto = this.state.photos.find(eachPhoto=>{
+      return eachPhoto._id == e.target.id
+    })
+    console.log(thePhoto.stylez)
+    this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src, stylez: thePhoto.stylez});
   };
 
   // showUp = () => {
@@ -61,7 +65,7 @@ export default class Collection extends Component {
       console.log('saved',res)
       this.onHide()
       setTimeout(function(){
-       // window.location.reload();
+        window.location.reload();
       },200);
     })
   }
@@ -81,7 +85,7 @@ export default class Collection extends Component {
     stylez.crop = "fill"
     stylez.gravity = "face"
     stylez.radius = "max"
-    stylez.quality = "100"
+    stylez.quality = "1000"
     stylez.default = "false"
     this.setState({stylez})
   }
@@ -93,6 +97,7 @@ export default class Collection extends Component {
     stylez.quality = "100"
     stylez.zoom = "0.5"
     stylez.default = "false"
+    delete stylez.radius 
     this.setState({stylez})
   }
 
@@ -110,6 +115,7 @@ export default class Collection extends Component {
     let stylez = {...this.state.stylez}
     stylez.effect = "cartoonify"
     stylez.default = "false"
+    stylez.quality = "100"
     this.setState({stylez})
   }
 
@@ -129,8 +135,17 @@ export default class Collection extends Component {
 
   blackAndWhite = () => {
     let stylez = {...this.state.stylez}
-    console.log(stylez)
     stylez.effect4 = "art:audrey"
+    stylez.default = "false"
+    this.setState({stylez})
+  }
+
+  none = () => {
+    let stylez = {...this.state.stylez}
+    delete stylez.effect
+    delete stylez.effect2
+    delete stylez.effect3
+    delete stylez.effect4
     stylez.default = "false"
     this.setState({stylez})
   }
@@ -243,6 +258,9 @@ export default class Collection extends Component {
               </Col>
               <Col xs={6} md={4} className="btnCol">
                 <code><Button onClick={this.cartoonify}>Cartoonify</Button></code>
+              </Col>
+              <Col xs={6} md={4} className="btnCol">
+                <code><Button onClick={this.none}>None</Button></code>
               </Col>
             </Row>
           </Container>
