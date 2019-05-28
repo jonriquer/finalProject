@@ -31,16 +31,34 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">MERN Boilerplate</h1>
-          <NavLink to="/" exact>Home</NavLink>
-          {api.isLoggedIn() && <NavLink to="/collection">Collection</NavLink>}
-          {/* <NavLink to="/add-country">Add country</NavLink> */}
-          {api.isLoggedIn() && <NavLink to="/upload">Upload Photo</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          {/* <NavLink to="/secret">Secret</NavLink> */}
+          <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <a class="navbar-brand navLogo" href="/"><strong>[ Photo Crop ]</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        {!api.isLoggedIn() && <a class="nav-link" href="/signup">Sign Up</a>}
+                    </li>
+                    <li class="nav-item">
+                        {!api.isLoggedIn() && <a class="nav-link" href="/login">Log In</a>}
+                    </li>
+                    <li class="nav-item">
+                        {api.isLoggedIn() && <a class="nav-link" href="/collection">Collection</a>}
+                    </li>
+                    <li class="nav-item">
+                        {api.isLoggedIn() && <a class="nav-link" href="/upload">Upload Photo</a>}
+                    </li>
+                    <li class="nav-item">
+                      {api.isLoggedIn() && <a class="nav-link" href="/" onClick={(e)=> this.handleLogoutClick(e)}>Logout</a>}
+                    </li>
+                </ul>
+            </div>
+          </nav>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />

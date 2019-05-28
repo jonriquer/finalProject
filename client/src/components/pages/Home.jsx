@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 export default class Home extends Component {
   // constructor(props) {
   //   super(props)
@@ -7,10 +6,13 @@ export default class Home extends Component {
   //   }
   // }
   render() {                
+
     return (
-      <div className="Home">
-        <h1>CLIENT HOME</h1>
-        <p>This is a sample project with the MERN stack</p>
+      <div className="Home"  style={{ backgroundImage: `url("images/homeBackground.png")` }} > 
+        <div className="homeText">
+          {/* <h1>[ Photo Crop ]</h1> */}
+          <h2>Crop your photos easliy for you application</h2>
+        </div>
       </div>
     );
   }

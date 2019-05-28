@@ -32,14 +32,24 @@ export default class Upload extends Component {
     }   
 
     return (
-      <div className="Home">
-        <h2>Home</h2>
-        <p>This is a sample project with the MERN stack</p>
-        <img src={this.state.photoUrl ? this.state.baseUrl + this.state.photoUrl : 'http://support.hostgator.com/img/articles/weebly_image_sample.png'} width="300px" />
-        <form onSubmit={this.handleSubmit}>
-          <input type="file" onChange={(e)=>this.handleChange(e)} /> <br/>
-          <button type="submit">Save new profile picture</button>
-        </form>
+      <div className="Upload"  style={{ backgroundImage: `url("images/upload.jpg")` }} > 
+        <div className="uploadDisplay">
+
+          <img src={this.state.photoUrl ? this.state.baseUrl + this.state.photoUrl : 'http://support.hostgator.com/img/articles/weebly_image_sample.png'} width="300px" />
+
+          <div class="input-group">
+            <form onSubmit={this.handleSubmit}>
+              <div class="custom-file">
+                <input type="file" onChange={(e)=>this.handleChange(e)} class="custom-file-input uploadInput" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"/>
+                <label class="custom-file-label uploadInput" for="inputGroupFile04">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary uploadBtn" type="submit" id="inputGroupFileAddon04">Upload</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
       </div>
     );
   }

@@ -158,16 +158,16 @@ export default class Collection extends Component {
     }  
     
     return (
-      <div className="Collection">
+      <div className=" Collection Home"  style={{ backgroundImage: `url("images/homeBackground.png")` }} > 
         
-        <h2>List of Photos</h2>
-
+        {/* <h2>List of Photos</h2> */}
+        <div className="list">
         {this.state.photos.map((c, index) => {
           // console.log(c)
           return (
             
               <li key={index}>
-                <Image
+                <Image className="imgCircleRadius"
                   cloudName="jonriquer"
                   publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl: c.photoUrl}
                   height="300"
@@ -207,7 +207,7 @@ export default class Collection extends Component {
               </li>
 
         )})}
-      
+      </div>
         
       <Modal {...this.props} onHide={this.onHide} aria-labelledby="contained-modal-title-vcenter" show={this.state.popup }>
         
@@ -222,7 +222,7 @@ export default class Collection extends Component {
             <Row className="show-grid">
               <Col xs={12} md={12} className="centerModal">
                 <code>
-                  <img src={this.state.clickedPhoto} width="400px"/>
+                  <img src={this.state.clickedPhoto} width="350px"/>
                 </code>
               </Col>
             </Row>
