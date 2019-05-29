@@ -163,7 +163,6 @@ export default class Collection extends Component {
         {/* <h2>List of Photos</h2> */}
         <div className="list">
         {this.state.photos.map((c, index) => {
-          // console.log(c)
           return (
             
               <li key={index}>
@@ -177,11 +176,14 @@ export default class Collection extends Component {
                   radius={c.stylez.radius}
                 >
                   
-                <Transformation 
-                  height="300" width="300"
+                <Transformation
+                  height="300"
+                  width="300"
+                  gravity={c.stylez.gravity}
                   gravity={c.stylez.gravity}
                   quality={c.stylez.quality}
                   crop={c.stylez.crop}
+                  fetchFormat="png"
                   radius={c.stylez.radius}
                   effect= {c.stylez.effect}
                   effect= {c.stylez.effect2}
@@ -202,7 +204,6 @@ export default class Collection extends Component {
                 <Transformation 
                   effect= {c.stylez.effect4}
                 />
-
                 </Image>
               </li>
 
