@@ -23,8 +23,26 @@ export default class App extends Component {
     }
   }
 
-  handleLogoutClick(e) {
+  handleLogoutClick = (e) => {
     api.logout()
+  }
+
+  handleShow = () => {
+    console.log("handleShow 1 is running")
+    this.setState({ show: true });
+  }
+
+  handleShow2 = () => {
+    console.log("handleShow 2 is running")
+    this.setState({ show2: true });
+  }
+
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
+  handleClose2 = () => {
+    this.setState({ show2: false });
   }
 
   render() {
@@ -42,10 +60,10 @@ export default class App extends Component {
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        {!api.isLoggedIn() && <a class="nav-link" href="/signup">Sign Up</a>}
+                        {!api.isLoggedIn() && <a class="nav-link" href="#" onClick={this.handleShow} >Sign Up</a>}
                     </li>
                     <li class="nav-item">
-                        {!api.isLoggedIn() && <a class="nav-link" href="/login">Log In</a>}
+                        {!api.isLoggedIn() && <a class="nav-link" href="#" onClick={this.handleShow2}>Log In</a>}
                     </li>
                     <li class="nav-item">
                         {api.isLoggedIn() && <a class="nav-link" href="/collection">Collection</a>}
@@ -61,7 +79,7 @@ export default class App extends Component {
           </nav>
         </header>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={(props) => <Home {...props} show={this.state.show} show2={this.state.show2} handleClose={this.handleClose} handleClose2={this.handleClose2}/>} />
           <Route path="/collection" component={Collection} />
           <Route path="/upload" component={Upload} />
 

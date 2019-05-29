@@ -1,18 +1,185 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Form, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import api from "../../api";
+import PasswordStrengthMeter from './PasswordStrengthMeter';
 export default class Home extends Component {
   // constructor(props) {
   //   super(props)
   //   this.state = {
   //   }
   // }
-  render() {                
 
+  // handleShow() {
+  //   this.setState({ show: true });
+  // }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+      message: null
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  // ===== SIGN UP SUBMIT BUTTON ============
+  handleClick(e) {
+    e.preventDefault();
+    let data = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    api
+      .signup(data)
+      .then(result => {
+        console.log("SUCCESS!");
+        this.props.history.push("/upload"); // Redirect to the home page
+      })
+      .catch(err => this.setState({ message: err.toString() }));
+  }
+  //====== END SIGN UP SUBMIT BUTTON ==============
+
+
+  //====== LOG IN SUBMIT BUTTON =================
+  handleClick2(e) {
+    e.preventDefault()
+    api.login(this.state.username, this.state.password)
+      .then(result => {
+        console.log('SUCCESS!')
+        this.props.history.push("/collection") // Redirect to the home page
+      })
+      .catch(err => this.setState({ message: err.toString() }))
+  }
+  //===== END LOG IN SUBMIT BUTTON =================
+
+  render() {
+    console.log(this.state);
     return (
-      <div className="Home"  style={{ backgroundImage: `url("images/homeBackground.png")` }} > 
+      <div
+        className="Home"
+        style={{ backgroundImage: `url("images/crop.jpeg")` }}
+      >
         <div className="homeText">
           {/* <h1>[ Photo Crop ]</h1> */}
-          <h2>Crop your photos easliy for you application</h2>
+          <h1>
+            Crop your photos <br/> 
+            easliy for your <br/> 
+            application
+          </h1>
         </div>
+
+        {/* ===== SIGN UP MODAL ============================ */}
+        <Modal show={this.props.show} onHide={this.props.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Sign Up</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
+                  value={this.state.username}
+                  name="username"
+                  onChange={this.handleInputChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  name="password"
+                  onChange={this.handleInputChange}
+                />
+                <PasswordStrengthMeter password={this.state.password}/>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.handleClose}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={e => {
+                this.handleClick(e);
+                this.props.handleClose();
+              }}
+            >
+              Submit
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {/* ======= END SIGN UP MODAL ========================== */}
+
+
+        {/* ====== LOG IN MODAL ===================================== */}
+        <Modal show={this.props.show2} onHide={this.props.handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Log In</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
+                  value={this.state.username}
+                  name="username"
+                  onChange={this.handleInputChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  name="password"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.handleClose2}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={e => {
+                this.handleClick2(e);
+                this.props.handleClose2();
+              }}
+            >
+              Log In
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {/* ======= END LOG IN MODAL ======================================= */}
+
       </div>
     );
   }

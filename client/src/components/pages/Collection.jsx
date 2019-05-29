@@ -158,7 +158,7 @@ export default class Collection extends Component {
     }  
     
     return (
-      <div className=" Collection Home"  style={{ backgroundImage: `url("images/homeBackground.png")` }} > 
+      <div className=" Collection"  style={{ backgroundImage: `url("images/crop.jpeg")` }} > 
         
         {/* <h2>List of Photos</h2> */}
         <div className="list">
@@ -222,7 +222,7 @@ export default class Collection extends Component {
             <Row className="show-grid">
               <Col xs={12} md={12} className="centerModal">
                 <code>
-                  <img src={this.state.clickedPhoto} width="350px"/>
+                  <img src={this.state.clickedPhoto} width="275px"/>
                 </code>
               </Col>
             </Row>
