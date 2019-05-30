@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Collection from './pages/Collection';
-// import AddCountry from './pages/AddCountry';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Upload from './pages/Upload';
-
 import api from '../api';
-import logo from '../logo.svg';
 
 export default class App extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
       photos: [],
       clickedPhoto: String,
-      // circle: {},
       stylez: {}
-      // popup: false
     }
   }
 
-  handleLogoutClick = (e) => {
+  handleLogoutClick = () => {
     api.logout()
   }
 
@@ -46,6 +42,7 @@ export default class App extends Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
@@ -78,17 +75,16 @@ export default class App extends Component {
             </div>
           </nav>
         </header>
+
         <Switch>
           <Route path="/" exact component={(props) => <Home {...props} show={this.state.show} show2={this.state.show2} handleClose={this.handleClose} handleClose2={this.handleClose2}/>} />
           <Route path="/collection" component={Collection} />
           <Route path="/upload" component={Upload} />
-
-          {/* <Route path="/add-country" component={AddCountry} /> */}
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          <Route path="/secret" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
+        
       </div>
     );
   }

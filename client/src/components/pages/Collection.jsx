@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import api from "../../api";
 import { Redirect } from 'react-router-dom';
-import {
-  Image,
-  // Video,
-  Transformation,
-  // CloudinaryContext
-} from "cloudinary-react";
-import { Modal, Col, Container, Row, Button, ButtonToolbar } from "react-bootstrap";
-
+import { Image,Transformation } from "cloudinary-react";
+import { Modal, Col, Container, Row, Button } from "react-bootstrap";
 
 export default class Collection extends Component {
+
   state = {
     photos: [],
     clickedPhoto: String,
@@ -45,14 +40,6 @@ export default class Collection extends Component {
     console.log(thePhoto.stylez)
     this.setState({ popup: !this.state.popup, picID: e.target.id, clickedPhoto: e.target.src});
   };
-
-  // showUp = () => {
-  //   return (
-  //     <div className="modal">
-  //      HELLO  
-  //     </div>
-  //   );
-  // };
 
   onHide = () => {
     this.setState({popup : false})
@@ -150,7 +137,6 @@ export default class Collection extends Component {
     this.setState({stylez})
   }
 
-
   render() {
 
     if(!api.isLoggedIn()){
@@ -160,12 +146,11 @@ export default class Collection extends Component {
     return (
       <div className=" Collection"  style={{ backgroundImage: `url("images/crop.jpeg")` }} > 
         
-        {/* <h2>List of Photos</h2> */}
         <div className="list">
-        {this.state.photos.map((c, index) => {
-          return (
-            
+          {this.state.photos.map((c, index) => {
+            return (
               <li key={index}>
+
                 <Image className="imgCircleRadius"
                   cloudName="jonriquer"
                   publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl: c.photoUrl}
@@ -206,8 +191,8 @@ export default class Collection extends Component {
                 />
                 </Image>
               </li>
-
-        )})}
+              
+            )})}
       </div>
         
       <Modal {...this.props} onHide={this.onHide} aria-labelledby="contained-modal-title-vcenter" show={this.state.popup }>

@@ -4,15 +4,6 @@ import { Modal } from "react-bootstrap";
 import api from "../../api";
 import PasswordStrengthMeter from './PasswordStrengthMeter';
 export default class Home extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
-
-  // handleShow() {
-  //   this.setState({ show: true });
-  // }
 
   constructor(props) {
     super(props);
@@ -71,14 +62,14 @@ export default class Home extends Component {
   //===== END LOG IN SUBMIT BUTTON =================
 
   render() {
-    console.log(this.state);
+
+    // console.log(this.state);
     return (
       <div
         className="Home"
         style={{ backgroundImage: `url("images/crop.jpeg")` }}
       >
         <div className="homeText">
-          {/* <h1>[ Photo Crop ]</h1> */}
           <h1>
             Crop your photos <br/> 
             easliy for your <br/> 
@@ -88,9 +79,11 @@ export default class Home extends Component {
 
         {/* ===== SIGN UP MODAL ============================ */}
         <Modal show={this.props.show} onHide={this.props.handleClose}>
+
           <Modal.Header closeButton>
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicEmail">
@@ -120,9 +113,16 @@ export default class Home extends Component {
                 />
                 <PasswordStrengthMeter password={this.state.password}/>
               </Form.Group>
-              <button ref={x => this.invisbtn = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button>
+
+              {/* === Invisible Button for "Enter click Submit" === */}
+              <button 
+                ref={x => this.invisbtn = x} 
+                type="submit" 
+                style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> 
+              </button>
             </Form>
           </Modal.Body>
+
           <Modal.Footer>
             <Button variant="secondary" onClick={this.props.handleClose}>
               Close
@@ -135,15 +135,18 @@ export default class Home extends Component {
               Submit
             </Button>
           </Modal.Footer>
+          
         </Modal>
         {/* ======= END SIGN UP MODAL ========================== */}
 
 
         {/* ====== LOG IN MODAL ===================================== */}
         <Modal show={this.props.show2} onHide={this.props.handleClose2}>
+
           <Modal.Header closeButton>
             <Modal.Title>Log In</Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
             <Form  onSubmit={this.handleSubmit2}>
               <Form.Group controlId="formBasicEmail">
@@ -172,9 +175,15 @@ export default class Home extends Component {
                   required= "true"
                 />
               </Form.Group>
-                <button ref={x => this.invisbtn2 = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button> 
+                {/* === Invisible Button for "Enter click Submit" === */}
+                <button 
+                  ref={x => this.invisbtn2 = x} 
+                  type="submit" 
+                  style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> 
+                </button> 
             </Form>
           </Modal.Body>
+
           <Modal.Footer>
             <Button variant="secondary" onClick={this.props.handleClose2}>
               Close
@@ -187,6 +196,7 @@ export default class Home extends Component {
               Log In
             </Button>
           </Modal.Footer>
+
         </Modal>
         {/* ======= END LOG IN MODAL ======================================= */}
 

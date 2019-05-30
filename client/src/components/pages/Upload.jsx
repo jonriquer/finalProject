@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import { Redirect } from 'react-router-dom';
-// import Axios from 'axios';
-
 
 export default class Upload extends Component {
+
   state = {
       file:null,
       baseUrl: "http://res.cloudinary.com/jonriquer/image/upload/"
   }
 
   handleChange = (e) => {
+
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        console.log(e.target.result)
+        document.getElementById('preview').src = e.target.result //bad practice use ref
+      }
+  
+      reader.readAsDataURL(e.target.files[0]);
+    }
     this.setState({
       file: e.target.files[0]
     })
@@ -35,7 +45,7 @@ export default class Upload extends Component {
       <div className="Upload"  style={{ backgroundImage: `url("images/upload.jpg")` }} > 
         <div className="uploadDisplay">
 
-          <img src={this.state.photoUrl ? this.state.baseUrl + this.state.photoUrl : 'http://support.hostgator.com/img/articles/weebly_image_sample.png'} width="300px" />
+          <img id="preview" src={this.state.photoUrl ? this.state.baseUrl + this.state.photoUrl : 'http://support.hostgator.com/img/articles/weebly_image_sample.png'} width="300px" />
 
           <div class="input-group">
             <form onSubmit={this.handleSubmit}>
@@ -53,7 +63,4 @@ export default class Upload extends Component {
       </div>
     );
   }
-
-
-
 }

@@ -4,120 +4,38 @@ body {
   font-family: sans-serif;
 }
 
-.info {
-  margin: 20px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  display: inline-block;
-  background-color: #5776e9;
-  color: white;
+.navbar {
+  background-color: transparent;
 }
 
-// .info.info-danger {
-//   background-color: #e73f3f;
-// }
-
-// --------------------
-// Style for App component
-.App {
-  text-align: center;
-
-  // .navLogo {
-  //   width: 2vw;
-  // }
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
-
-  .App-header {
-    // background-color: rgb(39, 38, 38);
-    // padding: 10px;
-    color: white;
-
-    a {
-      color: white;
-      padding: 0 5px;
-      text-decoration: unset;
-    }
-
-    a.active {
-      font-weight: bold;
-    }
-  }
-
-  .App-title {
-    font-size: 1.5em;
-  }
-
-  .App-intro {
-    font-size: large;
-  }
-
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
+.top-nav-collapse {
+  background-color: #4285F4;
 }
 
-.Collection {
-
+.Home {
   background-size:cover;
-  // object-fit: contain;
-  height:104vh;
+  height:100vh;
   background-repeat: no-repeat;
   background-position: center;
 
-
-  overflow: auto;
-
-  h2 {
-    // padding: 35px;
-    // margin-top: -10px;
-  }
-
-  .list {
-    margin-top: 50px;
-    float: left;
-    padding: 0 0 0 15%; 
-  }
-
-  li {
-    list-style: none;
-    padding: 20px;
-  }
-
-  .imgCircleRadius {
-    // border-radius: 100%
-  }
-
-  // li > button {
-  //   border: none;
-  //   background-color: transparent;
-  // }
-
-  li img {
-    object-fit: contain;
-    //border-radius: 50%;
-    // width: 250px;
-    // height: 250px;
-    transition:all .5s;
-
+  .homeText {
+    color: white;
+    padding: 75px 0 0 0; 
     
+    h1 {
+      font-size: 5vw;
+      text-align: left;
+      padding: 10% 0 0 10%;
+    }
+
   }
 
-  li img:hover {
-    transform: scale(1.1, 1.1);
+  Form {
+    width: 30%;
   }
-
 }
 
+//=============== Auth Modals ================
 .mainModal {
   width: 60vw;
 }
@@ -127,6 +45,7 @@ body {
 }
 
 .centerModal {
+
   display: flex;
   justify-content: center;
   padding:0;
@@ -141,28 +60,15 @@ body {
     }
 
   } 
-
-
-
   
 }
-
 
 .modalBtnTitle {
   padding-top: 30px;
 }
+//============= End Auth Modals ===============
 
-// --------------------
-// Style for Home component
-.Home {
-  p {
-    font-size: 1.2em;
-  }
-}
-
-
-
-
+// =========== Password Strength Bar ==========
 .password-strength-meter {
   text-align: left;
 }
@@ -200,38 +106,38 @@ body {
 .strength-Strong::-webkit-progress-value {
   background-color: #70C1B3;
 }
+// ========== End Password Strength Bar =========
 
 
+.Collection {
 
-
-
-.Home {
   background-size:cover;
-  // object-fit: contain;
   height:104vh;
   background-repeat: no-repeat;
   background-position: center;
 
-  .homeText {
-    color: white;
-    padding: 75px 0 0 0; 
-    
-    h1 {
-      font-size: 5vw;
-      text-align: left;
-      padding: 10% 0 0 10%;
-    }
+  overflow: auto;
 
+  .list {
+    margin-top: 50px;
+    float: left;
+    padding: 0 0 0 15%; 
   }
 
-  Form {
-    width: 30%;
+  li {
+    list-style: none;
+    padding: 20px;
   }
-}
 
-.homeText h2 {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 4vw;
+  li img {
+    object-fit: contain;
+    transition:all .5s;
+  }
+
+  li img:hover {
+    transform: scale(1.2, 1.2);
+  }
+
 }
 
 .Upload {
@@ -261,64 +167,40 @@ body {
   
 }
 
-.navbar {
-  background-color: transparent;
-}
-
-.top-nav-collapse {
-  background-color: #4285F4;
-}
-
-// @media screen and (max-width: 768px) {
-//   .navbar {
-//       background-color: #4285F4;
-//   }
-// }
-
-
 @media screen and (max-width: 768px) {
 
   .navbar {
     background-color: #4285F4;
   }
 
-    .Home {
+  .Home {
 
-      background-position: 80% 80%;
+    background-position: 80% 80%;
 
-      .homeText {
-        
-        h1 {
-          font-size: 7vw;
-        }
+    .homeText {
+      
+      h1 {
+        font-size: 7vw;
       }
     }
+  }
     
-    .Collection {
-      
-      background-position: left;
-      
-      .list {
-        margin: 50px 0 0 0;
-        padding: 0 0 0 5%;
-      }
-
+  .Collection {
+    
+    background-position: left;
+    
+    .list {
+      margin: 50px 0 0 0;
+      padding: 0 0 0 5%;
     }
 
-    .Upload {
+  }
 
-      .uploadDisplay {
-        margin: 40% 10% 0 0;
-      }
+  .Upload {
 
+    .uploadDisplay {
+      margin: 40% 10% 0 0;
     }
+
+  }
 }
-
-// --------------------
-// Style for Secret component
-// .Secret {
-//   .result {
-//     font-size: 1.2em;
-//     color: $primary;
-//   }
-// }
