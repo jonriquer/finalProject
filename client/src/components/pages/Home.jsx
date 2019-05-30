@@ -47,16 +47,21 @@ export default class Home extends Component {
   }
   //====== END SIGN UP SUBMIT BUTTON ==============
 
-
+  
   //====== LOG IN SUBMIT BUTTON =================
-  handleClick2(e) {
+  handleSubmit2 = (e) => {
     e.preventDefault()
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
         this.props.history.push("/collection") // Redirect to the home page
+        this.props.handleClose2();
       })
       .catch(err => this.setState({ message: err.toString() }))
+  }
+
+  handleClick2 = () => {
+    this.invisbtn.click()
   }
   //===== END LOG IN SUBMIT BUTTON =================
 
@@ -135,7 +140,7 @@ export default class Home extends Component {
             <Modal.Title>Log In</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form  onSubmit={this.handleSubmit2}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -144,6 +149,7 @@ export default class Home extends Component {
                   value={this.state.username}
                   name="username"
                   onChange={this.handleInputChange}
+                  required= "true"
                 />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
@@ -158,8 +164,10 @@ export default class Home extends Component {
                   value={this.state.password}
                   name="password"
                   onChange={this.handleInputChange}
+                  required= "true"
                 />
               </Form.Group>
+                <button ref={x => this.invisbtn = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button> 
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -169,10 +177,7 @@ export default class Home extends Component {
             <Button
               variant="primary"
               type="submit"
-              onClick={e => {
-                this.handleClick2(e);
-                this.props.handleClose2();
-              }}
+              onClick={this.handleClick2}
             >
               Log In
             </Button>
