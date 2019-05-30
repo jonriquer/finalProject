@@ -31,7 +31,7 @@ export default class Home extends Component {
   }
 
   // ===== SIGN UP SUBMIT BUTTON ============
-  handleClick(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     let data = {
       username: this.state.username,
@@ -42,8 +42,13 @@ export default class Home extends Component {
       .then(result => {
         console.log("SUCCESS!");
         this.props.history.push("/upload"); // Redirect to the home page
+        this.props.handleClose();
       })
       .catch(err => this.setState({ message: err.toString() }));
+  }
+
+  handleClick = () => {
+    this.invisbtn.click()
   }
   //====== END SIGN UP SUBMIT BUTTON ==============
 
@@ -61,7 +66,7 @@ export default class Home extends Component {
   }
 
   handleClick2 = () => {
-    this.invisbtn.click()
+    this.invisbtn2.click()
   }
   //===== END LOG IN SUBMIT BUTTON =================
 
@@ -87,7 +92,7 @@ export default class Home extends Component {
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -96,6 +101,7 @@ export default class Home extends Component {
                   value={this.state.username}
                   name="username"
                   onChange={this.handleInputChange}
+                  required="true"
                 />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
@@ -110,9 +116,11 @@ export default class Home extends Component {
                   value={this.state.password}
                   name="password"
                   onChange={this.handleInputChange}
+                  required= "true"
                 />
                 <PasswordStrengthMeter password={this.state.password}/>
               </Form.Group>
+              <button ref={x => this.invisbtn = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button>
             </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -122,10 +130,7 @@ export default class Home extends Component {
             <Button
               variant="primary"
               type="submit"
-              onClick={e => {
-                this.handleClick(e);
-                this.props.handleClose();
-              }}
+              onClick= {this.handleClick}
             >
               Submit
             </Button>
@@ -167,7 +172,7 @@ export default class Home extends Component {
                   required= "true"
                 />
               </Form.Group>
-                <button ref={x => this.invisbtn = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button> 
+                <button ref={x => this.invisbtn2 = x} type="submit" style={{ width: `0`, height: `0`, border: `none`, backgroundColor: 'white'}}> </button> 
             </Form>
           </Modal.Body>
           <Modal.Footer>
