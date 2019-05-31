@@ -72,7 +72,7 @@ export default class Home extends Component {
         <div className="homeText">
           <h1>
             Crop your photos <br/> 
-            easliy for your <br/> 
+            easily for your <br/> 
             application
           </h1>
         </div>
