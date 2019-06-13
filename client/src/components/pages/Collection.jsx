@@ -153,7 +153,7 @@ export default class Collection extends Component {
 
                 <Image className="imgCircleRadius"
                   cloudName="jonriquer"
-                  publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl: c.photoUrl}
+                  publicId={(c.stylez.default=== true) ? this.state.baseUrl + c.photoUrl : c.photoUrl}
                   height="300"
                   width="300"
                   onClick={this.editPopUp}
